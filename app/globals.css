@@ -1,0 +1,229 @@
+@import "tailwindcss";
+
+/* ============================================================
+   InvestLens by Galaxy — Design Tokens（第三迭代）
+   沿用 Galaxy 官网设计系统：近黑底 #050505、象牙白文字 #F3F2EF、发丝线 #272728、
+   象牙反白区 #EEEEE9 / #131313；Galaxy 红 #D64640 只用于极小的品牌句点与短线。
+   InvestLens 保留一个克制的功能色（鼠尾草青）表示「已核验 / 真实数据 / 与你有关」。
+   涨跌按 A 股惯例：红涨绿跌，属于金融语义，与品牌色分离。
+   ============================================================ */
+@theme {
+  --color-bg: #050505;
+  --color-bg-deep: #030303;
+  --color-surface: #0b0b0b;
+  --color-surface-2: #111111;
+  --color-surface-3: #191919;
+  --color-line: #2a2a2b;
+  --color-line-soft: #1d1d1e;
+  --color-fg: #f3f2ef;
+  --color-fg-2: #cfcecb;
+  --color-muted: #a7a7a3;
+  --color-faint: #747472;
+
+  /* 主强调 = Galaxy 象牙白（按钮、选中、焦点） */
+  --color-brand: #f3f2ef;
+  --color-brand-strong: #ffffff;
+  --color-brand-soft: rgb(243 242 239 / 0.07);
+  /* 功能色：已核验 / 真实数据 / 与你有关 */
+  --color-teal: #7cc4b3;
+  --color-teal-soft: rgb(124 196 179 / 0.1);
+  /* Galaxy 品牌红：只用于品牌句点与短线（与 Galaxy 官网 official.css 的 --red 一致） */
+  --color-galaxy: #b4141e;
+  --color-ivory: #efeee9;
+  --color-ink: #171816;
+
+  --color-up: #f0525c;
+  --color-down: #22b573;
+  --color-warn: #f2b544;
+  --color-risk: #ff8a4c;
+  --color-danger: #f0616d;
+  --color-info: #6cb6ff;
+
+  --font-sans: var(--font-inter), "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei UI", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  /* Galaxy 偏方正的发丝线版式 */
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+  --radius-xl: 6px;
+
+  --shadow-panel: none;
+  --shadow-glow: 0 0 0 1px rgb(243 242 239 / 0.3);
+
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-fade-up: fade-up 0.25s var(--ease-out-expo) both;
+  --animate-shimmer: shimmer 1.6s linear infinite;
+  --animate-pulse-dot: pulse-dot 2.4s ease-in-out infinite;
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes shimmer {
+    from { background-position: -200% 0; }
+    to { background-position: 200% 0; }
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+  }
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    --header-h: 60px;
+  }
+  html {
+    background: var(--color-bg);
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv11", "ss01";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+  ::selection {
+    background: #ecece5;
+    color: #050505;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  button, [role="button"] { cursor: pointer; }
+  button:disabled { cursor: not-allowed; }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #2a333e transparent;
+  }
+  *::-webkit-scrollbar { width: 8px; height: 8px; }
+  *::-webkit-scrollbar-thumb { background: #2a333e; border-radius: 8px; }
+  *::-webkit-scrollbar-track { background: transparent; }
+}
+
+@layer components {
+  /* 数字：等宽表格数字 */
+  .num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+  .tnum { font-variant-numeric: tabular-nums; }
+
+  .panel {
+    background: var(--color-surface);
+    border: 1px solid var(--color-line-soft);
+    border-radius: var(--radius-lg);
+  }
+  .panel-hover {
+    transition: border-color 0.2s var(--ease-out-expo), background-color 0.2s var(--ease-out-expo), transform 0.2s var(--ease-out-expo);
+  }
+  .panel-hover:hover {
+    border-color: var(--color-line);
+    background-color: var(--color-surface-2);
+  }
+
+  .hairline { border-color: var(--color-line-soft); }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 30%, transparent 75%);
+  }
+
+  /* Galaxy 标题中的弱化词（灰色 em） */
+  .brand-text {
+    color: #878784;
+  }
+  /* Galaxy 描边词 */
+  .outline-word {
+    color: transparent;
+    -webkit-text-stroke: 1px rgb(245 245 243 / 0.84);
+  }
+  /* Galaxy 编辑式超大标题 */
+  .display {
+    font-weight: 500;
+    letter-spacing: -0.075em;
+    line-height: 0.92;
+  }
+  /* Galaxy 小型大写标签 */
+  .smallcaps {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  /* Galaxy 下划线文字操作 */
+  .text-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding-bottom: 11px;
+    border-bottom: 1px solid currentColor;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .text-action > :last-child {
+    transition: transform 0.2s var(--ease-out-expo);
+  }
+  .text-action:hover > :last-child {
+    transform: translate(3px, -3px);
+  }
+  .galaxy-dot {
+    color: var(--color-galaxy);
+  }
+  @keyframes filament-orbit {
+    0% { transform: rotate(-2.4deg) scale(0.992); }
+    100% { transform: rotate(2.4deg) scale(1.016); }
+  }
+  .filament {
+    animation: filament-orbit 40s ease-in-out infinite alternate;
+  }
+
+  .skeleton {
+    background: linear-gradient(90deg, #121212 0%, #1c1c1c 50%, #121212 100%);
+    background-size: 200% 100%;
+    animation: var(--animate-shimmer);
+    border-radius: 8px;
+  }
+
+  .kicker {
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-faint);
+    font-weight: 600;
+  }
+
+  .demo-stripe {
+    background-image: repeating-linear-gradient(135deg, rgb(242 181 68 / 0.08) 0 6px, transparent 6px 12px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Recharts 细节修正 */
+.recharts-wrapper:focus, .recharts-surface:focus { outline: none; }
+.recharts-cartesian-axis-tick-value { font-family: var(--font-mono); }

@@ -1,0 +1,13 @@
+# InvestLens 扶摇中转 Worker —— 只部署到 workers.dev，不绑定任何自定义域名或路由
+name = "investlens-fuyao-relay"
+main = "src/index.ts"
+compatibility_date = "2026-10-01"
+workers_dev = true
+preview_urls = false
+
+# 不记录请求日志（请求头中含扶摇 Key）
+[observability]
+enabled = false
+
+# RELAY_SECRET 只以 Secret 形式在 Cloudflare 控制台设置：
+# Workers 和 Pages → investlens-fuyao-relay → 设置 → 变量和机密 → 添加 → 类型「密钥」
