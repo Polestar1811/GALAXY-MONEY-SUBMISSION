@@ -44,4 +44,4 @@ Mock 结果从不计入真实验证。真实接口的原始记录含扶摇行情
 
 ## 演示视频（可选）
 
-已有 65 秒录屏，内容为**早期版本 InvestLens V1**。画面包含扶摇真实行情，其公开分发权限尚未确认，因此**没有放入公开仓库**。录屏脚本见 [DEMO.md](DEMO.md)。正式网站本身即可完整体验 V2。
+[docs/demo/investlens-demo.webm](demo/investlens-demo.webm)：65 秒录屏，内容为**早期版本 InvestLens V1 的演示**（不含 V2 的 Genesis 深度访谈、投资人格、财富路径与组合探索）。录屏脚本见 [DEMO.md](DEMO.md)。V2 请直接在正式网站体验。
